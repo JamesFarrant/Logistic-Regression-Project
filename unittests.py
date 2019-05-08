@@ -1,7 +1,7 @@
-import pytest
 import pandas as pd
-from .model import load_data
+import pytest
 
+from .model import load_data
 
 # ----- load_data tests -----
 
