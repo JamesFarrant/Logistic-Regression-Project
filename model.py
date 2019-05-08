@@ -1,4 +1,5 @@
 import pandas as pd
+from sklearn.linear_model import LogisticRegression
 
 
 def load_data(csv_path: str, delimiter: str = ";") -> pd.DataFrame:
