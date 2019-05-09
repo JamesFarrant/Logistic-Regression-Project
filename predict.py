@@ -10,9 +10,11 @@ def create_user_profile(user):
     pass
 
 
-def predict_user(user_profile: pd.DataFrame, model="models/LogReg.pkl") -> float:
+def predict_user(
+    user_profile: pd.DataFrame, model="models/LogReg.pkl"
+) -> float:
     """[summary]
-    
+
     Arguments:
         user_profile {[type]} -- [description]
     """
