@@ -20,14 +20,18 @@ def load_data(csv_path: str, delimiter: str = ";") -> pd.DataFrame:
     return pd.read_csv(csv_path, delimiter=delimiter)
 
 
-def preprocess_training_data(training_data: pd.DataFrame) -> pd.DataFrame:
-    """[summary]
+    """Converts loaded .csv data into a one-hot-encoded format suitable for
+    scikit-learn and deep learning models.
 
     Arguments:
-        training_data {pd.DataFrame} -- [description]
+        training_data {pd.DataFrame} -- Raw training data
+                                        represented as a pd.DataFrame
+
+    Keyword Arguments:
+        target {str} -- The target column for a model to predict.
 
     Returns:
-        pd.DataFrame -- [description]
+        pd.DataFrame -- One-hot encoded representation of training_data.
     """
     training_data.loc[training_data["y"] == "yes", "y"] = 1
     training_data.loc[training_data["y"] == "no", "y"] = 0
