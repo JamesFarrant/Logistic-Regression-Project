@@ -27,7 +27,12 @@ def preprocess_training_data(training_data: pd.DataFrame) -> pd.DataFrame:
     Returns:
         pd.DataFrame -- [description]
     """
-    pass
+    training_data.loc[training_data["y"] == "yes", "y"] = 1
+    training_data.loc[training_data["y"] == "no", "y"] = 0
+    return training_data.head()
+
+
+print(preprocess_training_data(load_data("data/bank-full.csv")))
 
 
 def train_model(training_data: pd.DataFrame) -> LogisticRegression:
@@ -64,5 +69,3 @@ def train_model(training_data: pd.DataFrame) -> LogisticRegression:
         training_data["y"]
     )
     print(x_train, x_test, y_train, y_test)
-
-print(train_model(load_data("data/bank-full.csv")))
