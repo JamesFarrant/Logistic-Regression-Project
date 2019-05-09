@@ -31,7 +31,8 @@ def preprocess_training_data(
                                         represented as a pd.DataFrame
 
     Keyword Arguments:
-        target {str} -- The target column for a model to predict.
+        target {str} -- The target column for a model to predict
+                        during training and when deployed.
 
     Returns:
         pd.DataFrame -- One-hot encoded representation of training_data.
