@@ -76,6 +76,3 @@ def train_log_reg(training_data: pd.DataFrame, model_name="LogReg") -> str:
         f"Successfully trained and saved model {model_name} as "
         f"{model_name}.pkl!"
     )
-
-
-# print(train_model(preprocess_training_data(load_data("data/bank-full.csv"))))
