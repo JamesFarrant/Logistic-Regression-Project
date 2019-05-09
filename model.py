@@ -1,6 +1,7 @@
 import pandas as pd
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
+from sklearn.metrics import classification_report
 
 
 def load_data(csv_path: str, delimiter: str = ";") -> pd.DataFrame:
@@ -36,9 +37,6 @@ def preprocess_training_data(training_data: pd.DataFrame) -> pd.DataFrame:
     return training_data
 
 
-print(preprocess_training_data(load_data("data/bank-full.csv")))
-
-
 def train_model(training_data: pd.DataFrame) -> LogisticRegression:
     """[summary]
 
@@ -50,26 +48,11 @@ def train_model(training_data: pd.DataFrame) -> LogisticRegression:
     """
     log_reg = LogisticRegression()
     x_train, x_test, y_train, y_test = train_test_split(
-        training_data[
-            [
-                "age",
-                "job",
-                "marital",
-                "education",
-                "default",
-                "balance",
-                "housing",
-                "loan",
-                "contact",
-                "day",
-                "month",
-                "duration",
-                "campaign",
-                "pdays",
-                "previous",
-                "poutcome",
-            ]
-        ],
-        training_data["y"]
+        training_data.loc[:, training_data.columns != "y"], training_data["y"]
     )
-    print(x_train, x_test, y_train, y_test)
+    log_reg.fit(x_train, y_train)
+    predictions = log_reg.predict(x_test)
+    print(classification_report(y_test,predictions))
+
+
+# print(train_model(preprocess_training_data(load_data("data/bank-full.csv"))))
