@@ -1,9 +1,11 @@
 import pandas as pd
 import pytest
 
-from .model import load_data
+from .model import load_data, preprocess_training_data, train_log_reg
 
+##### model.py tests #####
 # ----- load_data tests -----
+
 
 def test_load_data_as_frame():
     valid_file = "data/bank-full.csv"
@@ -22,3 +24,13 @@ def test_load_data_invalid_delimeter():
                 load_data("data/bank-full.csv", [])
                 load_data("data/bank-full.csv", {})
                 load_data("data/bank-full.csv", (1, 2, 3))
+
+
+# ----- preprocess_training_data tests -----
+
+# ----- train_log_reg tests -----
+
+
+##### predict.py tests #####
+
+##### app.py tests #####
