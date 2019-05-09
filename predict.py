@@ -8,15 +8,6 @@ import joblib
 import json
 
 
-# TODO: Data formatting when submitted as JSON
-# This particular profile _should_ have a high probability of 0
-# (not subscribing)
-
-# TODO: Preprocess input JSON to be the same OHE format as the trained model
-# ahead of prediction
-# simply retrieve (and store, if needed) the list of columns after the training OHE output.
-# Then run pd.get_dummies on the test set/example. Loop through the output test OHE columns,
-# drop those that do not appear in the training OHE and add those that are missing in test OHE filled with zeros.
 test_user = {
     "age": 58,
     "job": "management",
