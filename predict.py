@@ -65,5 +65,3 @@ def predict_user(
     )
     return pred_dict
 
-
-print(predict_user(create_user_profile(test_user)))
