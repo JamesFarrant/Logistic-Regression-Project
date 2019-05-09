@@ -1,4 +1,5 @@
 import pandas as pd
+import joblib
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
@@ -37,7 +38,7 @@ def preprocess_training_data(training_data: pd.DataFrame) -> pd.DataFrame:
     return training_data
 
 
-def train_model(training_data: pd.DataFrame) -> LogisticRegression:
+def train_model(training_data: pd.DataFrame, model_name="LogReg") -> str:
     """[summary]
 
     Arguments:
@@ -46,13 +47,20 @@ def train_model(training_data: pd.DataFrame) -> LogisticRegression:
     Returns:
         sklearn.linear_model.LogisticRegression -- [description]
     """
-    log_reg = LogisticRegression()
+    model = LogisticRegression()
     x_train, x_test, y_train, y_test = train_test_split(
         training_data.loc[:, training_data.columns != "y"], training_data["y"]
     )
-    log_reg.fit(x_train, y_train)
-    predictions = log_reg.predict(x_test)
-    print(classification_report(y_test,predictions))
+    model.fit(x_train, y_train)
+    predictions = model.predict(x_test)
+    print("--- Training results ---")
+    print(classification_report(y_test, predictions))
+    print(f"Saving model {model_name} with parameters: {model}...")
+    joblib.dump(model, f"models/{model_name}.pkl", compress=3)
+    return (
+        f"Successfully trained and saved model {model_name} as "
+        f"{model_name}.pkl!"
+    )
 
 
 # print(train_model(preprocess_training_data(load_data("data/bank-full.csv"))))
