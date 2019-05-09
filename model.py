@@ -45,14 +45,21 @@ def preprocess_training_data(
     return training_data
 
 
-def train_model(training_data: pd.DataFrame, model_name="LogReg") -> str:
-    """[summary]
+def train_log_reg(training_data: pd.DataFrame, model_name="LogReg") -> str:
+    """Trains an sklearn.linear_model.LogisticRegression model based on data
+    represented by training_data in pd.DataFrame format.
 
     Arguments:
-        training_data {pd.DataFrame} -- [description]
+        training_data {pd.DataFrame} -- A preprocessed pd.DataFrame created
+                                        from training data represented as a
+                                        .csv file.
+
+    Keyword Arguments:
+        model_name {str} -- The prefix of the model to use when saving it as a
+                            .pkl file.
 
     Returns:
-        sklearn.linear_model.LogisticRegression -- [description]
+        {str} -- Statement showing model was successfully trained and saved.
     """
     model = LogisticRegression()
     x_train, x_test, y_train, y_test = train_test_split(
