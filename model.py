@@ -24,7 +24,7 @@ def preprocess_training_data(
     training_data: pd.DataFrame, target="y"
 ) -> pd.DataFrame:
     """Converts loaded .csv data into a one-hot-encoded format suitable for
-    scikit-learn and deep learning models.
+    scikit-learn and deep learning models using pd.get_dummies.
 
     Arguments:
         training_data {pd.DataFrame} -- Raw training data
