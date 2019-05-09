@@ -34,19 +34,24 @@ def create_user_profile(user: dict) -> pd.DataFrame:
     return user
 
 
-def predict_user(
-    user_profile: pd.DataFrame, round_prec=3
-) -> float:
-    """[summary]
+def predict_user(user_profile: pd.DataFrame, round_prec=3) -> float:
+    """
 
     Arguments:
         user_profile {[type]} -- [description]
+
+    Keyword Arguments:
+        round_prec {int} -- Rounding precision of the prediction (default: {3})
+
+    Returns:
+        {str} -- JSON string representation of model "yes_prob" prediction:
+                likelihood user _will_ subscribe to product based on profile.
     """
     model = joblib.load("models/LogReg.pkl")
     user = user_profile.reindex(columns=TRAINING_COLUMNS.columns, fill_value=0)
     prediction = model.predict_proba(user)
     pred_dict = {
-            "no_prob": round(prediction[0][0], round_prec),
-            "yes_prob": round(prediction[0][1], round_prec),
-        }
+        "no_prob": round(prediction[0][0], round_prec),
+        "yes_prob": round(prediction[0][1], round_prec),
+    }
     return json.dumps(pred_dict["yes_prob"])
