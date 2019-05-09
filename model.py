@@ -20,6 +20,9 @@ def load_data(csv_path: str, delimiter: str = ";") -> pd.DataFrame:
     return pd.read_csv(csv_path, delimiter=delimiter)
 
 
+def preprocess_training_data(
+    training_data: pd.DataFrame, target="y"
+) -> pd.DataFrame:
     """Converts loaded .csv data into a one-hot-encoded format suitable for
     scikit-learn and deep learning models.
 
@@ -33,10 +36,10 @@ def load_data(csv_path: str, delimiter: str = ";") -> pd.DataFrame:
     Returns:
         pd.DataFrame -- One-hot encoded representation of training_data.
     """
-    training_data.loc[training_data["y"] == "yes", "y"] = 1
-    training_data.loc[training_data["y"] == "no", "y"] = 0
-    y = training_data["y"]
-    training_data.drop(["y"], axis=1, inplace=True)
+    training_data.loc[training_data[target] == "yes", target] = 1
+    training_data.loc[training_data[target] == "no", target] = 0
+    y = training_data[target]
+    training_data.drop([target], axis=1, inplace=True)
     training_data = pd.get_dummies(training_data)
     training_data = pd.concat([training_data, y], axis=1)
     return training_data
