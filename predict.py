@@ -17,40 +17,33 @@ import json
 # simply retrieve (and store, if needed) the list of columns after the training OHE output.
 # Then run pd.get_dummies on the test set/example. Loop through the output test OHE columns,
 # drop those that do not appear in the training OHE and add those that are missing in test OHE filled with zeros.
-test_user = json.dumps(
-    {
-        "age": 58,
-        "job": "management",
-        "education": "tertiary",
-        "default": "no",
-        "balance": 2143,
-        "housing": "yes",
-        "loan": "no",
-        "contact": "unknown",
-        "day": 5,
-        "month": "may",
-        "duration": 261,
-        "campgaign": 1,
-        "pdays": -1,
-        "previous": 0,
-        "poutcome": "unknown",
-    }
-)
+test_user = {
+    "age": 58,
+    "job": "management",
+    "education": "tertiary",
+    "default": "no",
+    "balance": 2143,
+    "housing": "yes",
+    "loan": "no",
+    "contact": "unknown",
+    "day": 5,
+    "month": "may",
+    "duration": 261,
+    "campgaign": 1,
+    "pdays": -1,
+    "previous": 0,
+    "poutcome": "unknown",
+}
 
 
-'''
-def create_user_profile(user):
+def create_user_profile(user: dict) -> pd.DataFrame:
     """[summary]
 
     Arguments:
         user {[type]} -- [description]
     """
-    user = pd.read_json(user, )
+    user = pd.DataFrame.from_dict([user])
     return user
-
-
-print(create_user_profile(test_user))
-'''
 
 
 def predict_user(
@@ -62,30 +55,9 @@ def predict_user(
         user_profile {[type]} -- [description]
     """
     model = joblib.load(model)
-    user = pd.read_csv("data/bank-full.csv", delimiter=";").head(1)[
-        [
-            "age",
-            "job",
-            "marital",
-            "education",
-            "default",
-            "balance",
-            "housing",
-            "loan",
-            "contact",
-            "day",
-            "month",
-            "duration",
-            "campaign",
-            "pdays",
-            "previous",
-            "poutcome",
-        ]
-    ]
-    user = user.reindex(columns=TRAINING_COLUMNS.columns, fill_value=0)
-    print(user)
+    user = user_profile.reindex(columns=TRAINING_COLUMNS.columns, fill_value=0)
     prediction = model.predict_proba(user)
-    print(prediction)
+    return prediction
 
 
-print(predict_user(""))
+print(predict_user(create_user_profile(test_user)))
