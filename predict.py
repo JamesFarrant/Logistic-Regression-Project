@@ -47,7 +47,7 @@ def create_user_profile(user: dict) -> pd.DataFrame:
 
 
 def predict_user(
-    user_profile: pd.DataFrame, model="models/LogReg.pkl"
+    user_profile: pd.DataFrame, model="models/LogReg.pkl", round_prec=3
 ) -> float:
     """[summary]
 
@@ -57,7 +57,13 @@ def predict_user(
     model = joblib.load(model)
     user = user_profile.reindex(columns=TRAINING_COLUMNS.columns, fill_value=0)
     prediction = model.predict_proba(user)
-    return prediction
+    pred_dict = json.dumps(
+        {
+            "no_prob": round(prediction[0][0], round_prec),
+            "yes_prob": round(prediction[0][1], round_prec),
+        }
+    )
+    return pred_dict
 
 
 print(predict_user(create_user_profile(test_user)))
