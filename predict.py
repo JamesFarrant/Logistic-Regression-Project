@@ -7,6 +7,11 @@ import joblib
 
 
 def create_user_profile(user):
+    """[summary]
+
+    Arguments:
+        user {[type]} -- [description]
+    """
     pass
 
 
