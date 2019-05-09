@@ -2,6 +2,7 @@
 # potential customer and returns the likelihood of them
 # also subscribing to the product
 
+
 def predict_user(user_profile):
     """[summary]
     
