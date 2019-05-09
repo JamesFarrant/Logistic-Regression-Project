@@ -29,7 +29,11 @@ def preprocess_training_data(training_data: pd.DataFrame) -> pd.DataFrame:
     """
     training_data.loc[training_data["y"] == "yes", "y"] = 1
     training_data.loc[training_data["y"] == "no", "y"] = 0
-    return training_data.head()
+    y = training_data["y"]
+    training_data.drop(["y"], axis=1, inplace=True)
+    training_data = pd.get_dummies(training_data)
+    training_data = pd.concat([training_data, y], axis=1)
+    return training_data
 
 
 print(preprocess_training_data(load_data("data/bank-full.csv")))
