@@ -1,6 +1,3 @@
-# TODO: Create an API endpoint which accepts relevant parameters from a
-# potential customer and returns the likelihood of them
-# also subscribing to the product
 from model import load_data, preprocess_training_data
 from predict_utils import TRAINING_COLUMNS
 import pandas as pd
@@ -48,11 +45,8 @@ def predict_user(
     model = joblib.load("models/LogReg.pkl")
     user = user_profile.reindex(columns=TRAINING_COLUMNS.columns, fill_value=0)
     prediction = model.predict_proba(user)
-    pred_dict = json.dumps(
-        {
+    pred_dict = {
             "no_prob": round(prediction[0][0], round_prec),
             "yes_prob": round(prediction[0][1], round_prec),
         }
-    )
-    return pred_dict
-
+    return json.dumps(pred_dict["yes_prob"])
