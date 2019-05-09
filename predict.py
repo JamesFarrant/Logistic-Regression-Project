@@ -35,10 +35,14 @@ def create_user_profile(user: dict) -> pd.DataFrame:
 
 
 def predict_user(user_profile: pd.DataFrame, round_prec=3) -> float:
-    """
+    """Predicts a user's likelihood of subscribing to a product based on a
+    pd.DataFrame representation of their user profile. This profile is then
+    reindexed with the columns used during training (TRAINING_COLUMNS) to
+    allow for the LogisticRegression model to return predictions for it.
 
     Arguments:
-        user_profile {[type]} -- [description]
+        user_profile {pd.DataFrame} -- The user's profile represented as a
+                                    pd.DataFrame.
 
     Keyword Arguments:
         round_prec {int} -- Rounding precision of the prediction (default: {3})
