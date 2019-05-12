@@ -55,4 +55,3 @@ TRAINING_COLUMNS = pd.DataFrame(
         "poutcome_unknown",
     ]
 )
-

@@ -1,6 +1,7 @@
 from artificialio.model import load_data, preprocess_training_data
-from .predict_utils import TRAINING_COLUMNS
+from artificialio.predict_utils import TRAINING_COLUMNS
 import pandas as pd
+import numpy as np
 import joblib
 import json
 
@@ -37,7 +38,7 @@ def create_user_profile(user: dict) -> pd.DataFrame:
 def predict_user(user_profile: pd.DataFrame, round_prec=3) -> float:
     """Predicts a user's likelihood of subscribing to a product based on a
     pd.DataFrame representation of their user profile. This profile is then
-    reindexed with the columns used during training (TRAINING_COLUMNS) to
+    re-indexed with the columns used during training (TRAINING_COLUMNS) to
     allow for the LogisticRegression model to return predictions for it.
 
     Arguments:
@@ -59,3 +60,19 @@ def predict_user(user_profile: pd.DataFrame, round_prec=3) -> float:
         "yes_prob": round(prediction[0][1], round_prec),
     }
     return json.dumps(pred_dict["yes_prob"])
+
+
+def predict_frame(frame: pd.DataFrame) -> pd.DataFrame:
+    """
+
+    :param frame:
+    :return: pd.DataFrame
+    """
+    model = joblib.load("models/LogReg.pkl")
+    frame = load_data(frame)
+    frame.drop("y", axis=1, inplace=True)
+    frame = frame.reindex(columns=TRAINING_COLUMNS.columns, fill_value=0)
+    frame["yes_prob"] = frame.apply(
+        lambda x: model.predict_proba(np.array(x).reshape(1, -1))[0][1], axis=1
+    )
+    return frame.to_json(orient="records")
