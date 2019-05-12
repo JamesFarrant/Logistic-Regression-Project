@@ -1,18 +1,21 @@
 from flask import Flask, Response, request
-from predict import create_user_profile, predict_user
+from artificialio.model import load_data
+from artificialio.predict import create_user_profile, predict_user
 
 app = Flask(__name__)
 
 
 @app.route("/predict/csv", methods=["POST"])
 def csv_customer_likelihood(csv):
-    pass
+    if request.method == "POST":
+        pass
 
 
 @app.route("/predict/customer", methods=["POST"])
 def json_customer_likelihood():
-    customer_profile = request.get_json()
-    return customer_profile
+    if request.method == "POST":
+        customer_profile = request.get_json()
+        return Response(predict_user(create_user_profile(customer_profile)))
 
 
 if __name__ == "__main__":

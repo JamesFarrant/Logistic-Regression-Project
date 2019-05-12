@@ -1,5 +1,5 @@
-from model import load_data, preprocess_training_data
-from predict_utils import TRAINING_COLUMNS
+from artificialio.model import load_data, preprocess_training_data
+from .predict_utils import TRAINING_COLUMNS
 import pandas as pd
 import joblib
 import json
