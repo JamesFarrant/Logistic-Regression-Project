@@ -43,11 +43,11 @@ def predict_user(user_profile: pd.DataFrame, round_prec=3) -> float:
     return json.dumps(pred_dict["yes_prob"])
 
 
-def predict_frame(frame: pd.DataFrame) -> pd.DataFrame:
+def predict_frame(frame: pd.DataFrame) -> str:
     """
 
     :param frame:
-    :return: pd.DataFrame
+    :return: str
     """
     model = joblib.load("models/LogReg.pkl")
     frame = load_data(frame)
