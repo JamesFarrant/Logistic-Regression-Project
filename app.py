@@ -1,6 +1,6 @@
 from flask import Flask, Response, request
-from artificialio.model import load_data
-from artificialio.predict import create_user_profile, predict_user
+from model import load_data
+from predict import create_user_profile, predict_user, predict_frame
 
 app = Flask(__name__)
 
@@ -9,8 +9,7 @@ app = Flask(__name__)
 def csv_customer_likelihood():
     if request.method == "POST":
         file = request.files["file"]
-        data = load_data(file)
-        return Response(data)
+        return Response(predict_frame(file))
 
 
 @app.route("/predict/customer", methods=["POST"])
