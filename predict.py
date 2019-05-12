@@ -19,7 +19,7 @@ def create_user_profile(user: dict) -> pd.DataFrame:
     return user
 
 
-def predict_user(user_profile: pd.DataFrame, round_prec=3) -> str:
+def predict_user(user_profile: pd.DataFrame, round_prec: int = 3) -> str:
     """Predicts a user's likelihood of subscribing to a product based on a
     pd.DataFrame representation of their user profile. This profile is then
     re-indexed with the columns used during training (TRAINING_COLUMNS) to
