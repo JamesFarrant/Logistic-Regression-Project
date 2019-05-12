@@ -6,9 +6,11 @@ app = Flask(__name__)
 
 
 @app.route("/predict/csv", methods=["POST"])
-def csv_customer_likelihood(csv):
+def csv_customer_likelihood():
     if request.method == "POST":
-        pass
+        file = request.files["file"]
+        data = load_data(file)
+        return Response(data)
 
 
 @app.route("/predict/customer", methods=["POST"])
