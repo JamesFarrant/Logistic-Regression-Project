@@ -1,28 +1,9 @@
-from artificialio.model import load_data, preprocess_training_data
-from artificialio.predict_utils import TRAINING_COLUMNS
+from model import load_data, preprocess_training_data
+from predict_utils import TRAINING_COLUMNS
 import pandas as pd
 import numpy as np
 import joblib
 import json
-
-
-test_user = {
-    "age": 58,
-    "job": "management",
-    "education": "tertiary",
-    "default": "no",
-    "balance": 2143,
-    "housing": "yes",
-    "loan": "no",
-    "contact": "unknown",
-    "day": 5,
-    "month": "may",
-    "duration": 261,
-    "campgaign": 1,
-    "pdays": -1,
-    "previous": 0,
-    "poutcome": "unknown",
-}
 
 
 def create_user_profile(user: dict) -> pd.DataFrame:
@@ -71,8 +52,8 @@ def predict_frame(frame: pd.DataFrame) -> pd.DataFrame:
     model = joblib.load("models/LogReg.pkl")
     frame = load_data(frame)
     frame.drop("y", axis=1, inplace=True)
-    frame = frame.reindex(columns=TRAINING_COLUMNS.columns, fill_value=0)
-    frame["yes_prob"] = frame.apply(
+    reindex_frame = frame.reindex(columns=TRAINING_COLUMNS.columns, fill_value=0)
+    frame["yes_prob"] = reindex_frame.apply(
         lambda x: model.predict_proba(np.array(x).reshape(1, -1))[0][1], axis=1
-    )
+    ).round(3)
     return frame.to_json(orient="records")
