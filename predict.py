@@ -69,7 +69,7 @@ def predict_frame(frame: pd.DataFrame) -> str:
     API route.
     
     Arguments:
-        frame {pd.DataFrame} -- [description]
+        frame {pd.DataFrame} -- pd.DataFrame of the uploaded .csv file.
     
     Returns:
         str -- Record-oriented JSON string containing all original columns
