@@ -1,9 +1,11 @@
+import json
+
+import joblib
+import numpy as np
+import pandas as pd
+
 from model import load_data, preprocess_training_data
 from predict_utils import TRAINING_COLUMNS
-import pandas as pd
-import numpy as np
-import joblib
-import json
 
 
 def create_user_profile(user: dict) -> pd.DataFrame:

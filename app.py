@@ -1,6 +1,7 @@
 from flask import Flask, Response, request
+
 from model import load_data
-from predict import create_user_profile, predict_user, predict_frame
+from predict import create_user_profile, predict_frame, predict_user
 
 app = Flask(__name__)
 

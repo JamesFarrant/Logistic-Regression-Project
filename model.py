@@ -1,8 +1,8 @@
-import pandas as pd
 import joblib
+import pandas as pd
 from sklearn.linear_model import LogisticRegression
-from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report
+from sklearn.model_selection import train_test_split
 
 
 def load_data(csv_path: str, delimiter: str = ";") -> pd.DataFrame:
