@@ -4,7 +4,6 @@ import pytest
 from .model import load_data, preprocess_training_data, train_log_reg
 
 ##### model.py tests #####
-# ----- load_data tests -----
 
 
 def test_load_data_as_frame():
@@ -24,9 +23,6 @@ def test_load_data_invalid_delimeter():
         load_data("data/bank-full.csv", [])
         load_data("data/bank-full.csv", {})
         load_data("data/bank-full.csv", (1, 2, 3))
-
-
-# ----- preprocess_training_data tests -----
 
 
 def test_preprocess_training_data_invalid_target():
