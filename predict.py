@@ -11,7 +11,7 @@ def create_user_profile(user: dict) -> pd.DataFrame:
 
     Arguments:
         user {dict} -- JSON object posted via the /predict/customer route.
-    
+
     Returns:
         user {pd.DataFrame} -- User profile for further analysis.
     """
@@ -59,7 +59,7 @@ def predict_frame(frame: pd.DataFrame) -> str:
     process. Rounds the values for nicer viewing.
 
     ---
-    The reason why reindex_frame is used for the application and is not 
+    The reason why reindex_frame is used for the application and is not
     returned is to reduce the load on to_json() when it returns the resulting
     JSON string from the predictions (instead of returning all of the OHE cols
     as well).
@@ -67,10 +67,10 @@ def predict_frame(frame: pd.DataFrame) -> str:
 
     Finally, returns the pd.DataFrame as a JSON string back to the /predict/csv
     API route.
-    
+
     Arguments:
         frame {pd.DataFrame} -- pd.DataFrame of the uploaded .csv file.
-    
+
     Returns:
         str -- Record-oriented JSON string containing all original columns
 
@@ -78,7 +78,9 @@ def predict_frame(frame: pd.DataFrame) -> str:
     model = joblib.load("models/LogReg.pkl")
     frame = load_data(frame)
     frame.drop("y", axis=1, inplace=True)
-    reindex_frame = frame.reindex(columns=TRAINING_COLUMNS.columns, fill_value=0)
+    reindex_frame = frame.reindex(
+        columns=TRAINING_COLUMNS.columns, fill_value=0
+    )
     frame["yes_prob"] = reindex_frame.apply(
         lambda x: model.predict_proba(np.array(x).reshape(1, -1))[0][1], axis=1
     ).round(3)
