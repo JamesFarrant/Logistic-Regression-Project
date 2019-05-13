@@ -26,7 +26,7 @@ def preprocess_training_data(training_data: pd.DataFrame, target="y") -> pd.Data
 
     Arguments:
         training_data {pd.DataFrame} -- Raw training data
-                                        represented as a pd.DataFrame
+                                        represented as a pd.DataFrame.
 
     Keyword Arguments:
         target {str} -- The target column for a model to predict

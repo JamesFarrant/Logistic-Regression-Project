@@ -34,11 +34,3 @@ def test_preprocess_training_data_invalid_target():
     invalid_data = pd.DataFrame(data={"a": 1234, "b": "hi", "c": 0.09}, index=[0])
     with pytest.raises(KeyError):
         preprocess_training_data(invalid_data, target="hello")
-
-
-# ----- train_log_reg tests -----
-
-
-##### predict.py tests #####
-
-##### app.py tests #####

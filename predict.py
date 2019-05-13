@@ -74,7 +74,7 @@ def predict_frame(frame: pd.DataFrame) -> str:
         frame {pd.DataFrame} -- pd.DataFrame of the uploaded .csv file.
 
     Returns:
-        str -- Record-oriented JSON string containing all original columns
+        str -- Record-oriented JSON string containing all original columns.
 
     """
     model = joblib.load("models/LogReg.pkl")
