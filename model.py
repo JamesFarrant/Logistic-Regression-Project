@@ -70,4 +70,4 @@ def train_log_reg(training_data: pd.DataFrame, model_name="LogReg") -> str:
     print(classification_report(y_test, predictions))
     print(f"Saving model {model_name} with parameters: {model}...")
     joblib.dump(model, f"models/{model_name}.pkl", compress=3)
-    return f"Successfully trained and saved model {model_name} as " f"{model_name}.pkl!"
+    return f"Successfully trained and saved model {model_name} as {model_name}.pkl!"
