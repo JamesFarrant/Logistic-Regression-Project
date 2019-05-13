@@ -18,15 +18,23 @@ def test_load_data_file_not_found():
 
 
 def test_load_data_invalid_delimeter():
-        with pytest.raises(TypeError):
-                load_data("data/bank-full.csv", 1.0203)
-                load_data("data/bank-full.csv", 123)
-                load_data("data/bank-full.csv", [])
-                load_data("data/bank-full.csv", {})
-                load_data("data/bank-full.csv", (1, 2, 3))
+    with pytest.raises(TypeError):
+        load_data("data/bank-full.csv", 1.0203)
+        load_data("data/bank-full.csv", 123)
+        load_data("data/bank-full.csv", [])
+        load_data("data/bank-full.csv", {})
+        load_data("data/bank-full.csv", (1, 2, 3))
 
 
 # ----- preprocess_training_data tests -----
+
+
+def test_preprocess_training_data_invalid_target():
+    valid_data = load_data("data/bank-full.csv")
+    invalid_data = pd.DataFrame(data={"a": 1234, "b": "hi", "c": 0.09}, index=[0])
+    with pytest.raises(KeyError):
+        preprocess_training_data(invalid_data, target="hello")
+
 
 # ----- train_log_reg tests -----
 

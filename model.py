@@ -20,9 +20,7 @@ def load_data(csv_path: str, delimiter: str = ";") -> pd.DataFrame:
     return pd.read_csv(csv_path, delimiter=delimiter)
 
 
-def preprocess_training_data(
-    training_data: pd.DataFrame, target="y"
-) -> pd.DataFrame:
+def preprocess_training_data(training_data: pd.DataFrame, target="y") -> pd.DataFrame:
     """Converts loaded .csv data into a one-hot-encoded format suitable for
     scikit-learn and deep learning models using pd.get_dummies.
 
@@ -72,10 +70,4 @@ def train_log_reg(training_data: pd.DataFrame, model_name="LogReg") -> str:
     print(classification_report(y_test, predictions))
     print(f"Saving model {model_name} with parameters: {model}...")
     joblib.dump(model, f"models/{model_name}.pkl", compress=3)
-    return (
-        f"Successfully trained and saved model {model_name} as "
-        f"{model_name}.pkl!"
-    )
-
-
-# print(train_model(preprocess_training_data(load_data("data/bank-full.csv"))))
+    return f"Successfully trained and saved model {model_name} as " f"{model_name}.pkl!"
