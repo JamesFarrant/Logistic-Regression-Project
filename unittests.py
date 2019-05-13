@@ -1,7 +1,7 @@
 import pandas as pd
 import pytest
 
-from .model import load_data, preprocess_training_data, train_log_reg
+from model import load_data, preprocess_training_data, train_log_reg
 
 ##### model.py tests #####
 # ----- load_data tests -----
