@@ -27,6 +27,8 @@ def test_load_data_invalid_delimeter():
 
 def test_preprocess_training_data_invalid_target():
     valid_data = load_data("data/bank-full.csv")
-    invalid_data = pd.DataFrame(data={"a": 1234, "b": "hi", "c": 0.09}, index=[0])
+    invalid_data = pd.DataFrame(
+        data={"a": 1234, "b": "hi", "c": 0.09}, index=[0]
+    )
     with pytest.raises(KeyError):
         preprocess_training_data(invalid_data, target="hello")
