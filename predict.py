@@ -64,7 +64,7 @@ def predict_frame(frame: pd.DataFrame) -> str:
     The reason why reindex_frame is used for the application and is not
     returned is to reduce the load on to_json() when it returns the resulting
     JSON string from the predictions (instead of returning all of the OHE cols
-    as well).
+    as well, it returns the original columns only).
     ---
 
     Finally, returns the pd.DataFrame as a JSON string back to the /predict/csv
