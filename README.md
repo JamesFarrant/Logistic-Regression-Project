@@ -17,7 +17,7 @@
     "day": 5,
     "month": "may",
     "duration": 261,
-    "campgaign": 1,
+    "campaign": 1,
     "pdays": -1,
     "previous": 0,
     "poutcome": "unknown"
