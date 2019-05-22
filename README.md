@@ -23,7 +23,7 @@
     "poutcome": "unknown"
 }
 ```
-Example output: 0.587 - "yes" probability.
+Example output: 0.587 - "yes" probability for a customer subscribing to a product.
 
 #### POST localhost:5000/predict/csv (form-data) key: file type: file
 I would recommend using test.csv as the full dataset takes a while. Looks like to_json is the bottleneck here.
