@@ -1,4 +1,4 @@
-# artificialio
+# Technical Test Project
 
 
 ### Example requests (recommend Postman):
