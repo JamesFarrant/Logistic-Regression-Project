@@ -36,6 +36,3 @@ I would recommend using test.csv as the full dataset takes a while. Looks like t
 3. More tests on custom-built functions.
 4. Potentially look for a more elegant way to reindex the columns during prediction
 5. Try different ML models and record train/test performance in a log file.
-
-
-I really enjoyed the assignment and look forward to speaking with you soon!
