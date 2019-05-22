@@ -1,4 +1,4 @@
-# Technical Test Project
+# Logistic Regression Project
 
 
 ### Example requests (recommend Postman):
