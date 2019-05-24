@@ -21,7 +21,7 @@ def load_data(csv_path: str, delimiter: str = ";") -> pd.DataFrame:
 
 
 def preprocess_training_data(
-    training_data: pd.DataFrame, target="y"
+    training_data: pd.DataFrame, target: str = "y"
 ) -> pd.DataFrame:
     """Converts loaded .csv data into a one-hot-encoded format suitable for
     scikit-learn and deep learning models using pd.get_dummies.
