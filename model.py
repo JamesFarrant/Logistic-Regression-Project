@@ -46,7 +46,7 @@ def preprocess_training_data(
     return training_data
 
 
-def train_log_reg(training_data: pd.DataFrame, model_name="LogReg") -> str:
+def train_log_reg(training_data: pd.DataFrame, model_name: str = "LogReg") -> str:
     """Trains an sklearn.linear_model.LogisticRegression model based on data
     represented by training_data in pd.DataFrame format.
 
