@@ -59,12 +59,11 @@ def preprocess_training_data(
     # Remove unused/predictive columns
     # E.g. duration heavily correlated with target but not known beforehand.
     training_data.drop(
-        [target, "duration", "contact", "poutcome", "previous"],
+        [target, "duration", "contact"],
         axis=1,
         inplace=True,
     )
     training_data = pd.get_dummies(training_data)
-    print(training_data.columns)
     training_data = pd.concat([training_data, y], axis=1)
     return training_data
 
