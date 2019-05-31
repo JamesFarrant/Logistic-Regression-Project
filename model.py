@@ -46,7 +46,11 @@ def preprocess_training_data(
     return training_data
 
 
-def train_log_reg(training_data: pd.DataFrame, model_name: str = "LogReg") -> str:
+def train_log_reg(
+    training_data: pd.DataFrame,
+    model_name: str = "LogReg",
+    use_grid_search: bool = False,
+) -> str:
     """Trains an sklearn.linear_model.LogisticRegression model based on data
     represented by training_data in pd.DataFrame format.
 
@@ -66,9 +70,19 @@ def train_log_reg(training_data: pd.DataFrame, model_name: str = "LogReg") -> st
     x_train, x_test, y_train, y_test = train_test_split(
         training_data.loc[:, training_data.columns != "y"], training_data["y"]
     )
+    if use_grid_search:
+        penalty = ["l1", "l2"]
+        C = np.logspace(0, 4, 10)
+        hyperparameters = dict(C=C, penalty=penalty)
+        model = GridSearchCV(model, hyperparameters, cv=5, verbose=0)
+        model.fit(x_train, y_train)
+        predictions = model.predict(x_test)
+        print("--- Training results (using grid search) ---")
+    else:
     model.fit(x_train, y_train)
     predictions = model.predict(x_test)
-    print("--- Training results ---")
+        print("--- Training results (no grid search) ---")
+
     print(classification_report(y_test, predictions))
     print(f"Saving model {model_name} with parameters: {model}...")
     joblib.dump(model, f"models/{model_name}.pkl", compress=3)
