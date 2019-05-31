@@ -37,10 +37,31 @@ def preprocess_training_data(
     Returns:
         pd.DataFrame -- One-hot encoded representation of training_data.
     """
+    month_dict = {
+        "jan": 1,
+        "feb": 2,
+        "mar": 3,
+        "apr": 4,
+        "may": 5,
+        "jun": 6,
+        "jul": 7,
+        "aug": 8,
+        "sep": 9,
+        "oct": 10,
+        "nov": 11,
+        "dec": 12,
+    }
+    training_data.replace({"month": month_dict})
     training_data.loc[training_data[target] == "yes", target] = 1
     training_data.loc[training_data[target] == "no", target] = 0
     y = training_data[target]
-    training_data.drop([target], axis=1, inplace=True)
+    # Remove unused/predictive columns
+    # E.g. duration heavily correlated with target but not known beforehand.
+    training_data.drop(
+        [target, "duration", "contact", "poutcome", "previous"],
+        axis=1,
+        inplace=True,
+    )
     training_data = pd.get_dummies(training_data)
     training_data = pd.concat([training_data, y], axis=1)
     return training_data
