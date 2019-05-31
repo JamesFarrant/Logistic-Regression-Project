@@ -1,8 +1,9 @@
 import joblib
+import numpy as np
 import pandas as pd
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import GridSearchCV, train_test_split
 
 
 def load_data(csv_path: str, delimiter: str = ";") -> pd.DataFrame:
