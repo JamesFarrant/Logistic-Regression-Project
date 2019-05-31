@@ -85,6 +85,9 @@ def train_log_reg(
     Keyword Arguments:
         model_name {str} -- The prefix of the model to use when saving it as a
                             .pkl file.
+        use_grid_search {str} -- Whether to use an sklearn.model_selection
+                            GridSearchCV to find better model parameters.
+                            (default: {False})
 
     Returns:
         {str} -- Statement showing model was successfully trained and saved.
@@ -96,7 +99,7 @@ def train_log_reg(
     if use_grid_search:
         penalty = ["l1", "l2"]
         C = np.logspace(0, 4, 10)
-        hyperparameters = dict(C=C, penalty=penalty)
+        hyperparameters = dict(C=C, penalty=penalty, solver=["liblinear"])
         model = GridSearchCV(model, hyperparameters, cv=5, verbose=0)
         model.fit(x_train, y_train)
         predictions = model.predict(x_test)
