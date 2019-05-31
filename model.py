@@ -64,6 +64,7 @@ def preprocess_training_data(
         inplace=True,
     )
     training_data = pd.get_dummies(training_data)
+    print(training_data.columns)
     training_data = pd.concat([training_data, y], axis=1)
     return training_data
 
@@ -101,8 +102,8 @@ def train_log_reg(
         predictions = model.predict(x_test)
         print("--- Training results (using grid search) ---")
     else:
-    model.fit(x_train, y_train)
-    predictions = model.predict(x_test)
+        model.fit(x_train, y_train)
+        predictions = model.predict(x_test)
         print("--- Training results (no grid search) ---")
 
     print(classification_report(y_test, predictions))
